@@ -1,0 +1,12 @@
+<nav class="current">
+	<h1>Songs</h1>
+</nav>
+<article id='main' class="current">
+	<section>
+		<ul class="list">
+			<li  class='nav' ng-repeat="song in songs">
+				<a href="#/song/{{song.slug}}">{{song.title}}</a>
+			</li>
+		</ul>
+	</section>
+</article>
