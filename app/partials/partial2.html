@@ -1,9 +1,12 @@
 <nav class="current">
-	<a href='#/' class="button back">Song List</a>
-	<h1>Song List</h1>
+	<a href='#/' class="button back">Songs</a>
+	<h1>{{song.title}}</h1>
 </nav>
 <article id='main' class="current">
 	<section>
 		<div mp3-audio bind="mp3"></div>
+		<pre>
+{{lyrics}}
+		</pre>
 	</section>
 </article>
