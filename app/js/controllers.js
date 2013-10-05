@@ -7,6 +7,7 @@ angular.module('myApp.controllers', ['ngResource'])
   .controller('MyCtrl1', ['$scope', 'Songs', function( $scope, Songs ) {
       Songs.query( {}, function (response) {
           $scope.songs = response;
+          console.log( $scope.songs );
       });
   }])
 
@@ -22,11 +23,18 @@ angular.module('myApp.controllers', ['ngResource'])
           $scope.lyrics = response;
         });
 
-      angular.forEach(Songs, function (val, key) {
-        if ($routeParams.slug === val.slug )
-        {
-          $scope.mp3 = val.mp3;
-          $scope.song = val;
-        }
-      })
+
+      Songs.query( {}, function (response) {
+          $scope.songs = response;
+          console.log( $scope.songs );
+
+          angular.forEach($scope.songs, function (val, key) {
+            if ($routeParams.slug === val.slug )
+            {
+              $scope.mp3 = val.mp3;
+              $scope.song = val;
+            }
+          });
+      });
+
   }]);
