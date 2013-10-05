@@ -8,5 +8,5 @@
 angular.module('myApp.services', [])
   .value('version', '0.1')
   .factory('Songs', function ( $resource ) {
-  	return $resource('/data.json');
+  	return $resource('/data/songlist.json');
   });
