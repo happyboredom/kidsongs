@@ -2,10 +2,12 @@
 
 /* Controllers */
 
-angular.module('myApp.controllers', [])
+angular.module('myApp.controllers', ['ngResource'])
   // Controller 1
   .controller('MyCtrl1', ['$scope', 'Songs', function( $scope, Songs ) {
-    $scope.songs = Songs; 
+      Songs.query( {}, function (response) {
+          $scope.songs = response;
+      });
   }])
 
   // Controller 2
