@@ -9,13 +9,14 @@ angular.module('myApp.directives', [])
       elm.text(version);
     };
   }])
-  .directive('mp3Audio', [function() {
+  .directive('mp3Audio', ['$compile', 
+  		function($compile) {
 	    return  {
-			restrict:"A",
+			restrict:"AC",
 	    	scope: {
 				bind:'='
 		    },
-	    	template:'<audio controls><source src="{{bind}}" type="audio/mpeg; codecs=\'mp3\'"/></audio>'
+	    	template:'<audio preload="metadata" controls><source src="{{bind}}" type="audio/mpeg;codecs=\'mp3\'"/></audio>'
 		}
 	}])
 	.directive('markdown', [function () {
