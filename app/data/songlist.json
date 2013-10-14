@@ -1,5 +1,18 @@
 [
 {"slug":"alicecamel", "title":"Alice the Camel", "mp3":"http://kids.niehs.nih.gov/games/songs/childrens/alicecamel.mp3"},
+{"slug":"blacksh", "title":"Baa, Baa, Black Sheep", "mp3":"http://kids.niehs.nih.gov/games/songs/childrens/blacksh.mp3"},
+{"slug":"blowmandown", "title":"Blow the Man Down", "mp3":"http://kids.niehs.nih.gov/games/songs/childrens/blowmandown.mp3"},
+{"slug":"bingo", "title":"Bingo", "mp3":"http://kids.niehs.nih.gov/games/songs/childrens/bingo.mp3"},
+{"slug":"brahms", "title":"Brahms Lullaby", "mp3":"http://kids.niehs.nih.gov/games/songs/childrens/brahms.mp3"},
+{"slug":"buffalogals", "title":"Buffalo Gals", "mp3":"http://kids.niehs.nih.gov/games/songs/childrens/buffalogals.mp3"},
+{"slug":"campgranada", "title":"Camp Granada", "mp3":"http://kids.niehs.nih.gov/games/songs/childrens/granada.mp3"},
+{"slug":"casper", "title":"Casper the Friendly Ghost", "mp3":"http://kids.niehs.nih.gov/games/songs/childrens/casperct.mp3"},
+{"slug":"clementine", "title":"Clementine", "mp3":"http://kids.niehs.nih.gov/games/songs/childrens/clemtine.mp3"},
+{"slug":"daisy", "title":"Daisy Bell (A Bicycle Built for Two)", "mp3":"http://kids.niehs.nih.gov/games/songs/childrens/daisy.mp3"},
 {"slug":"frere", "title":"Frere Jacques", "mp3":"http://kids.niehs.nih.gov/games/songs/childrens/frere.mp3"},
-{"slug":"oldmac", "title":"Old Macdonald", "mp3":"http://kids.niehs.nih.gov/games/songs/childrens/oldmac.mp3"}
+{"slug":"oldmac", "title":"Old Macdonald", "mp3":"http://kids.niehs.nih.gov/games/songs/childrens/oldmac.mp3"},
+{"slug":"tisket", "title":"A-tisket A-tasket", "mp3":"http://kids.niehs.nih.gov/games/songs/childrens/tisket.mp3"}
 ]
+
+
+
