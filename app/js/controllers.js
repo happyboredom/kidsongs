@@ -11,13 +11,13 @@ angular.module('myApp.controllers', ['ngResource'])
   }])
 
   // Controller 2
-  .controller('MyCtrl2', ['$scope', '$routeParams', '$http', '$compile', 'Songs',
-    function( $scope, $routeParams, $http, $compile, Songs ) {
+  .controller('MyCtrl2', ['$scope', '$routeParams', '$http', '$compile', 'Songs', 'baseurl',
+    function( $scope, $routeParams, $http, $compile, Songs, baseurl ) {
       $scope.routeParams = $routeParams;
       $scope.songLoad = 'unknown';
 
       // get lyrics
-      $http.get( '/data/' + $routeParams.slug + '.html')
+      $http.get( baseurl + '/data/' + $routeParams.slug + '.html')
         .success( function (response) {
           $scope.lyrics = response;
         });

@@ -7,6 +7,7 @@
 // In this case it is a simple value service.
 angular.module('myApp.services', [])
   .value('version', '0.1')
-  .factory('Songs', function ( $resource ) {
-  	return $resource('/data/songlist.json');
+  .value('baseurl', '')
+  .factory('Songs', function ( $resource, baseurl ) {
+  	return $resource( baseurl + '/data/songlist.json');
   });
