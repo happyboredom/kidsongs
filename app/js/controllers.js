@@ -2,7 +2,7 @@
 
 /* Controllers */
 
-angular.module('myApp.controllers', ['ngResource'])
+angular.module('myApp.controllers', ['ngResource', 'ngSanitize'])
   // Controller 1
   .controller('MyCtrl1', ['$scope', 'Songs', function( $scope, Songs ) {
       Songs.query( {}, function (response) {
@@ -22,7 +22,33 @@ angular.module('myApp.controllers', ['ngResource'])
           $scope.lyrics = response;
         });
 
+      $scope.trustShowdownHtml = function () {
+        if ($scope.lyrics)
+        {
+          var converter = new Showdown.converter();
+          var spaced_lyrics = $scope.lyrics;
+          spaced_lyrics = spaced_lyrics.split('\n');
 
+          var verses = [];
+          var curverse = [];
+          var versecount = 0;
+          var out = '';
+          angular.forEach( spaced_lyrics, function (obj, i) {
+            if (obj)
+            {
+              curverse.push('* ' + obj);
+            } else {
+              verses.push( curverse.join('\n') );
+              curverse = [];
+              versecount++;
+            }
+          });
+          angular.forEach(verses, function(value, key){
+            out += converter.makeHtml(value);
+          });
+          return out;
+        }
+      };
       Songs.query( {}, function (response) {
           $scope.songs = response;
           angular.forEach($scope.songs, function (val, key) {
