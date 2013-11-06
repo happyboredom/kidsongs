@@ -26,11 +26,14 @@
   <script src="js/filters.js"></script>
   <script src="js/directives.js"></script>
   <!-- endbuild -->
+  <!-- phonegap -->
+  <script src="js/platform.js"></script>
+  <script src="cordova.js"></script>
   <script>
-  // onDeviceReady = function () {
-  //   angular.bootstrap(document, ['myApp']);
-  // }
-  // document.addEventListener('deviceready', onDeviceReady, false);
+  onDeviceReady = function () {
+    angular.bootstrap(document, ['myApp']);
+  }
+  document.addEventListener('deviceready', onDeviceReady, false);
   angular.bootstrap(document, ['myApp']);
   </script>
 </body>

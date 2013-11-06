@@ -11,10 +11,24 @@ angular.module('myApp.controllers', ['ngResource', 'ngSanitize'])
   }])
 
   // Controller 2
-  .controller('MyCtrl2', ['$scope', '$routeParams', '$http', '$compile', 'Songs', 'baseurl',
-    function( $scope, $routeParams, $http, $compile, Songs, baseurl ) {
+  .controller('MyCtrl2', ['$scope', '$routeParams', '$http', '$compile', 'Songs', 'baseurl', 'platform', 'version',
+    function( $scope, $routeParams, $http, $compile, Songs, baseurl, platform, version ) {
       $scope.routeParams = $routeParams;
       $scope.songLoad = 'unknown';
+      $scope.platform = platform; // ios, Android, web?
+      $scope.playing = false;
+      $scope.media = null;
+
+      $scope.$on('$destroy', function () {
+        try
+        {
+          $scope.media.stop();
+          $scope.media.release();
+          $scope.media = null;
+        } catch (err) {
+          // nothing
+        }
+      });
 
       // get lyrics
       $http.get( baseurl + '/data/' + $routeParams.slug + '.html')
@@ -22,6 +36,9 @@ angular.module('myApp.controllers', ['ngResource', 'ngSanitize'])
           $scope.lyrics = response;
         });
 
+      // for rendering HTML. Called in html snippet view.
+      // Angular currently does not have
+      // a filter to output into raw HTML.
       $scope.trustShowdownHtml = function () {
         if ($scope.lyrics)
         {
@@ -33,6 +50,7 @@ angular.module('myApp.controllers', ['ngResource', 'ngSanitize'])
           var curverse = [];
           var versecount = 0;
           var out = '';
+
           angular.forEach( spaced_lyrics, function (obj, i) {
             if (obj)
             {
@@ -49,6 +67,7 @@ angular.module('myApp.controllers', ['ngResource', 'ngSanitize'])
           return out;
         }
       };
+
       Songs.query( {}, function (response) {
           $scope.songs = response;
           angular.forEach($scope.songs, function (val, key) {
@@ -56,9 +75,24 @@ angular.module('myApp.controllers', ['ngResource', 'ngSanitize'])
             {
               $scope.mp3 = val.mp3;
               $scope.song = val;
-              // need to compile the directive after data
-              // because audio object needs urldata at time of rendering.
-              var inject = $compile( angular.element("<div mp3-audio bind=\"mp3\"></div>") )($scope);
+              var inject;
+              if ( $scope.platform === 'web' )
+              {
+                // need to compile the directive after data
+                // because audio object for HTML5 media player needs urldata at time of rendering.
+                // inject = $compile( angular.element("<div mp3-audio bind=\"mp3\"></div>") )($scope);
+                inject = $compile( angular.element('<div class="phonegapAudioPlayer" bind="mp3" playing="playing" media="media"></div>') )($scope);
+              }
+
+              if ( $scope.platform === 'ios' )
+              {
+                inject = $compile( angular.element('<div class="phonegapAudioPlayer" bind="mp3" playing="playing" media="media"></div>') )($scope);
+              }
+
+              if ( $scope.platform === 'android' )
+              {
+                inject = $compile( angular.element("<div mp3-audio bind=\"mp3\" playing=\"playing\" media=\"media\"></div>") )($scope);
+              }
               angular.element( document.getElementById("player") ).append( inject );
             }
           });

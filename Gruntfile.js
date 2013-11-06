@@ -229,6 +229,7 @@ module.exports = function (grunt) {
             'bower_components/**/*',
             'images/{,*/}*.{gif,webp}',
             'styles/fonts/*',
+            'js/platform.js', //to be overridden in phonegap merges
             'data/*'
           ]
         }, {

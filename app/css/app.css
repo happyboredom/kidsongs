@@ -7,3 +7,27 @@
 #lyrics ul {
 	list-style-type: none;
 }
+#player {
+	padding:0 10px;
+}
+/*.audioplayer {
+	width:136px;
+	border:1px solid #000;
+	border-radius: 5px;
+	box-shadow: 3px 3px 3px #aaa;
+}
+*/
+.audioplayer a {
+	display: block;
+	height:64px;
+	width:64px;
+	background-size: 64px 64px;
+	background-repeat: no-repeat;
+	text-indent: -10000px;
+}
+.audioplayer .play {
+	background-image:url(../images/play.png);
+}
+.audioplayer .stop {
+	background-image:url(../images/stop.png);
+}
