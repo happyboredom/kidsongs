@@ -17,6 +17,7 @@ angular.module('myApp.controllers', ['ngResource', 'ngSanitize'])
       $scope.songLoad = 'unknown';
       $scope.platform = platform; // ios, Android, web?
       $scope.playing = false;
+      $scope.position = 0;
       $scope.media = null;
 
       $scope.$on('$destroy', function () {

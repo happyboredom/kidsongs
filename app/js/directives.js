@@ -9,34 +9,52 @@ angular.module('myApp.directives', [])
       elm.text(version);
     };
   }])
-  .directive('phonegapAudioPlayer', ['$compile', '$document',
-  		function($compile, $document) {
+  .directive('phonegapAudioPlayer', ['$compile', '$document', '$timeout',
+  		function($compile, $document, $timeout) {
 	    return  {
 			restrict:"C",
 	    	scope: {
 				bind:'=',
 				playing:'=',
-				media:'='
+				media:'=',
+                position:'='
 		    },
 	    	template:'<div class="audioplayer" rel="{{bind}}"><a ng-class="{play:!playing, stop:playing}" ng-click="playOrStop()">Play/Stop</a></div>',
 	    	link: function ( scope, element, attr ) {
 	    		// Media is from Phonegap API
 
 	    		/* Private */
-	    		mediaSuccess = function() {
+	    		var mediaSuccess = function() {
 	    		};
-	    		mediaError = function () {
+	    		var mediaError = function () {
 	    		};
+
+
+                /* watcher */
+                var myIntervalFunction = function() {
+                    cancelRefresh = $timeout(function myFunction() {
+                        scope.media.getCurrentPosition();
+                        cancelRefresh = $timeout(myFunction, 1000);
+                    },1000);
+                };
+                var mediaTimer = $timeout(myIntervalFunction, 1000);
+
+                scope.$on('$destroy', function(e) {
+                    console.log('destroy timer');
+                    $timeout.cancel(cancelRefresh);
+                });
+                /* end watcher */
 
 	    		mediaStatus = function (status) {
 	    			if ( status == Media.MEDIA_RUNNING)
-			    		scope.playing = true;
+			    		scope.playing = 1;
 			    	else
-				    	scope.playing = false;
+				    	scope.playing = 0;
 	    		};
 	    		mediaCheck = function (status) {
 	    			console.log( status );
 	    		};
+
 	    		/* Public */
 	    		scope.playOrStop = function () {
 	    			if ( scope.playing )
@@ -44,10 +62,11 @@ angular.module('myApp.directives', [])
 				    	scope.playing = false;
 		    			scope.media.stop()
 	    			} else {
-				    	scope.playing = true;
+                        scope.loading = true;
 		    			scope.media.play();
 	    			}
 	    		}
+
 
 	    		/* execute !! */
 	    		if (Media != undefined)
